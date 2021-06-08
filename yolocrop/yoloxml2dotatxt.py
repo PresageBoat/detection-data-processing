@@ -9,7 +9,7 @@ from multiprocessing import Pool
 import os.path as osp
 import glob
 
-classes = ["button"]
+classes = ["vehicle"]
 
 class Yoloxml2Dotatxt(object):
     def __init__(self,xml_dir,dota_dir,num_process=8):
@@ -24,25 +24,6 @@ class Yoloxml2Dotatxt(object):
         if not osp.isdir(self.out_dota_dir):
             os.makedirs(self.out_dota_dir)
         self.num_process = num_process
-    
-    def _convert(size, box):
-        """原样保留。size为图片大小
-            将ROI的坐标转换为yolo需要的坐标
-            size是图片的w和h
-            box里保存的是ROI的坐标（x，y的最小值和最大值）
-            返回值为ROI中心点相对于图片大小的比例坐标，和ROI的w、h相对于图片大小的比例
-        """
-        dw = 1. / (size[0])
-        dh = 1. / (size[1])
-        x = (box[0] + box[1]) / 2.0
-        y = (box[2] + box[3]) / 2.0
-        w = box[1] - box[0]
-        h = box[3] - box[2]
-        x = x * dw
-        w = w * dw
-        y = y * dh
-        h = h * dh
-        return (x, y, w, h)
     
     def _xml2dota(self,image_id):
         # 现在传进来的只有图片名没有后缀

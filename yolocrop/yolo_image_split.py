@@ -5,7 +5,7 @@ import os.path as osp
 import os
 import numpy as np
 
-class DOTAImageSplitTool(object):
+class YoloImageSplitTool(object):
     def __init__(self,
                  in_root,
                  out_root,
@@ -13,8 +13,8 @@ class DOTAImageSplitTool(object):
                  tile_shape,
                  num_process=8,
                  ):
-        self.in_images_dir = osp.join(in_root, 'val/')
-        self.in_labels_dir = osp.join(in_root, 'val_dotalabels/')
+        self.in_images_dir = osp.join(in_root, 'images/')
+        self.in_labels_dir = osp.join(in_root, 'dotalabels/')
         self.out_images_dir = osp.join(out_root, 'images/')
         self.out_labels_dir = osp.join(out_root, 'dotalabels/')
         assert isinstance(tile_shape, tuple), f'argument "tile_shape" must be tuple but got {type(tile_shape)} instead!'
@@ -22,7 +22,7 @@ class DOTAImageSplitTool(object):
                           tuple), f'argument "tile_overlap" must be tuple but got {type(tile_overlap)} instead!'
         self.tile_overlap = tile_overlap
         self.tile_shape = tile_shape
-        images = glob.glob(self.in_images_dir + '*.png')
+        images = glob.glob(self.in_images_dir + '*.jpg')
         labels = glob.glob(self.in_labels_dir + '*.txt')
         image_ids = [*map(lambda x: osp.splitext(osp.split(x)[-1])[0], images)]
         label_ids = [*map(lambda x: osp.splitext(osp.split(x)[-1])[0], labels)]
@@ -94,15 +94,10 @@ class DOTAImageSplitTool(object):
 
 
 if __name__ == '__main__':
-    dir="C:/Users/pytorch/Desktop/Project/buttondetect/最新标注规则/crop"
+    dir="../test/"
 
-    # trainsplit = DOTAImageSplitTool(dir,
-    #                                 dir+'/trainsplit',
-    #                                 tile_overlap=(150, 150),
-    #                                 tile_shape=(600, 600))
-    # trainsplit.split()
-    valsplit = DOTAImageSplitTool(dir,
-                                  dir+'/valsplit',
+    valsplit = YoloImageSplitTool(dir,
+                                  dir+'/temp',
                                   tile_overlap=(150, 150),
                                   tile_shape=(600, 600))
     valsplit.split()

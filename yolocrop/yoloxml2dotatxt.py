@@ -87,8 +87,8 @@ class Yoloxml2Dotatxt(object):
 
 
 if __name__ == "__main__":
-    dir="C:/Users/pytorch/Desktop/Project/buttondetect/最新标注规则/RPA通用元素拾取（6.2修改完毕）"
-    lable_dir=dir+"/ttdotalabels/"
+    dir="./test"
+    lable_dir=dir+"/dotalabels/"
     xml_dir=dir+"/xml/"
 
     xml2dota=Yoloxml2Dotatxt(xml_dir,lable_dir)

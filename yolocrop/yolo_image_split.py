@@ -58,21 +58,24 @@ class YoloImageSplitTool(object):
         img = cv2.imdecode(np.fromfile(image_dir, dtype=np.uint8), cv2.IMREAD_UNCHANGED)
 
         h, w, _ = img.shape
-        w_ovr, h_ovr = self.tile_overlap
-        w_s, h_s = self.tile_shape
-        for h_off in range(0, max(1, h - h_ovr), h_s - h_ovr):
-            if h_off > 0:
-                h_off = min(h - h_s, h_off)  # h_off + hs <= h if h_off > 0
-            for w_off in range(0, max(1, w - w_ovr), w_s - w_ovr):
-                if w_off > 0:
-                    w_off = min(w - w_s, w_off)  # w_off + ws <= w if w_off > 0
+        overlap_w, overlap_h = self.tile_overlap
+        crop_w, crop_h = self.tile_shape
+        h_step = crop_h - overlap_h if h > crop_h else h
+        for h_off in range(0, h, h_step):
+            if h_off + crop_h >= h:
+                h_off = max(h - crop_h,0)
+
+            w_step = crop_w - overlap_w if w > crop_w else w
+            for w_off in range(0, w, w_step):
+                if w_off + crop_w >= w:
+                    w_off = max(w - crop_w,0)                
                 objs_tile = []
                 for obj in objs:
-                    if w_off <= obj['center'][0] <= w_off + w_s - 1:
-                        if h_off <= obj['center'][1] <= h_off + h_s - 1:
+                    if w_off <= obj['center'][0] <= w_off + crop_w - 1:
+                        if h_off <= obj['center'][1] <= h_off + crop_h - 1:
                             objs_tile.append(obj)
                 if len(objs_tile) > 0:
-                    img_tile = img[h_off:h_off + h_s, w_off:w_off + w_s, :]
+                    img_tile = img[h_off:h_off + crop_h, w_off:w_off + crop_w, :]
                     save_image_dir = osp.join(self.out_images_dir, f'{image_id}_{w_off}_{h_off}.png')
                     save_label_dir = osp.join(self.out_labels_dir, f'{image_id}_{w_off}_{h_off}.txt')
                     # cv2.imwrite(save_image_dir, img_tile)

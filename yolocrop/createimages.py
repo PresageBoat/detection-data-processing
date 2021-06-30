@@ -17,7 +17,7 @@ import copy
 
 
 class CreateImages():
-    def __init__(self,obj_dir,bg_dir,xml_savedir,num_process=8):
+    def __init__(self,obj_dir:str,bg_dir:str,xml_savedir:str,num_process=8):
         self.obj_dir = osp.join(obj_dir)
         self.bg_dir=osp.join(bg_dir)
         self.xml_savedir = osp.join(xml_savedir)
@@ -205,7 +205,7 @@ class CreateImages():
 
 
 if __name__ == "__main__":
-    dir="C:/Users/pytorch/Desktop/Project/buttondetect/最新标注规则/crop_train"
+    dir="root"
     bg_dir=dir+"/bg/"
     obj_dir=dir+"/button/"
     save_dir=dir+"/mr_result/"

@@ -4,13 +4,14 @@ import glob
 import os.path as osp
 import os
 import numpy as np
+from typing import Tuple
 
 class YoloImageSplitTool(object):
     def __init__(self,
-                 in_root,
-                 out_root,
-                 tile_overlap,
-                 tile_shape,
+                 in_root:str,
+                 out_root:str,
+                 tile_overlap:Tuple[int, int],
+                 tile_shape:Tuple[int, int],
                  num_process=8,
                  ):
         self.in_images_dir = osp.join(in_root, 'images/')

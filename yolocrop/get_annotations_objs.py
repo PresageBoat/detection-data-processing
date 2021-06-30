@@ -77,7 +77,7 @@ class GetAnnotationsObjs():
 
 
 if __name__ == '__main__':
-    root_dir="C:/Users/pytorch/Desktop/Project/buttondetect/最新标注规则/6.16交付标注/train"
+    root_dir="root"
     images_dir=root_dir+'/images/'
     xml_dir=root_dir+'/xml/'
     save_bg_dir=root_dir+'/bg/'

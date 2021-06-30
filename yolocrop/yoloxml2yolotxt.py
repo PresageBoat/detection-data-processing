@@ -66,7 +66,7 @@ def convert_annotation(xml_dir,labels_dir,image_add):
         bb = convert((w, h), b)
         out_file.write(str(cls_id) + " " + " ".join([str(a) for a in bb]) + '\n')
 
-dir="C:/Users/pytorch/Desktop/Project/buttondetect/最新标注规则/20210624train/val/split"
+dir="root"
 lable_dir=dir+"/labels/"
 xml_dir=dir+"/xml/"
 

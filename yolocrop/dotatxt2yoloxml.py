@@ -104,7 +104,7 @@ def makexml(txtPath, xmlPath, picPath):  #读取txt路径，xml保存路径，�
 
 
 #makexml("txt所在文件夹","xml保存地址","图片所在地址")
-txt_dir = "C:/Users/pytorch/Desktop/Project/buttondetect/最新标注规则/crop/valsplit/dotalabels/"
-xml_dir = "C:/Users/pytorch/Desktop/Project/buttondetect/最新标注规则/crop/valsplit/xml/"
-img_dir = "C:/Users/pytorch/Desktop/Project/buttondetect/最新标注规则/crop/valsplit/images/"
+txt_dir = "/txt"
+xml_dir = "/xml"
+img_dir = "/images"
 makexml(txt_dir, xml_dir, img_dir)
